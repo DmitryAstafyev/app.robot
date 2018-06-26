@@ -1,0 +1,4 @@
+<div class="apps-robot-logs" #_nodeList (click)="_onClick($event)">
+    <p class="apps-robot-log" *ngFor="let log of _logs;">{{log}}</p>
+</div>
+<span class="apps-robot-logs-auto-scroll fa fa-arrow-circle-o-down" *ngIf="_autoScrolling"></span>

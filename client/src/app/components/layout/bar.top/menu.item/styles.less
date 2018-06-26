@@ -1,0 +1,39 @@
+button-small-icon{
+    display: inline-block;
+    position: relative;
+    padding: 1px;
+    background: @gradient-blue-reverse;
+    border-radius: 1rem;
+    line-height: 0;
+    margin: 0.3rem 0.2rem;
+    span.button-small-icon{
+        position    : relative;
+        display     : inline-block;
+        padding     : 0.3rem 0.3rem;
+        cursor      : default;
+        font-size   : 0.55rem;
+        border-top:@3d-border-left-top;
+        border-left:@3d-border-left-top;
+        border-right: @3d-border-right-bottom;
+        border-bottom: @3d-border-right-bottom;
+        background: @gradient-light-blue;
+        border-radius: 1rem;
+        box-shadow: @small-dark-shadow;
+        &:hover{
+            background: @gradient-blue-reverse;
+        }
+        &.disabled{
+            cursor      : default;
+        }
+        &.disabled:hover{
+            background: @gradient-light-blue;
+        }
+        &.focused{
+            background: @gradient-light;
+        }
+        &.focused:hover{
+            background: @gradient-light-blue;
+        }
+    }
+
+}

@@ -1,0 +1,5 @@
+<span 
+    (click)="enabled && handler($event)" 
+    [attr.class]="'button-small-icon' + (enabled ? '' : 'disabled') + ' ' + (focused ? 'focused' : '') + ' ' + icon"
+    [attr.title]="caption"
+    ></span>

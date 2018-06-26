@@ -1,0 +1,5 @@
+{
+  "points": "1,1,0.5;2,2,0.6;3,3,0.7",
+  "logs"  :"just log here",
+  "status": [ { "key": "some_key", "value": "some_value"} ]
+}

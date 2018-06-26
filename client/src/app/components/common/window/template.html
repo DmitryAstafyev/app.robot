@@ -1,0 +1,26 @@
+<div [attr.class]="'modal-window' + ' ' + (_direction !== DIRECTIONS.nothing ? 'no-animation' : '') + ' ' + (focused ? 'focused' : '')" 
+    [style.top]="_getStyles().top"
+    [style.left]="_getStyles().left"
+    [style.width]="_getStyles().width"
+    [style.height]="_getStyles().height"
+    (mousedown)="_onFocus()">
+    <div class="modal-window-title" (mousedown)="_onElementMouseDown(DIRECTIONS.move, $event)">
+        <p class="modal-window-title">{{caption}}</p>
+        <p class="modal-window-buttons">
+            <button-small-icon *ngFor="let button of buttons;"
+                [caption]="button.caption"
+                [handler]="button.handler"
+                [icon]="button.icon"
+                [focused]="focused"
+            ></button-small-icon>
+        </p>
+    </div>
+    <div class="modal-window-content">
+        <modal-window-wrapper [component]="component" [EResized]="EResized"></modal-window-wrapper>
+    </div>
+    <div class="modal-window-boder-top" (mousedown)="_onElementMouseDown(DIRECTIONS.top, $event)"></div>
+    <div class="modal-window-boder-right" (mousedown)="_onElementMouseDown(DIRECTIONS.right, $event)"></div>
+    <div class="modal-window-boder-left" (mousedown)="_onElementMouseDown(DIRECTIONS.left, $event)"></div>
+    <div class="modal-window-boder-bottom" (mousedown)="_onElementMouseDown(DIRECTIONS.bottom, $event)"></div>
+    <div class="modal-window-boder-corner" (mousedown)="_onElementMouseDown(DIRECTIONS.corner, $event)"></div>
+</div>

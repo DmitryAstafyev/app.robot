@@ -1,0 +1,12 @@
+<div class="bar-top">
+    <div [attr.class]="'bar-top-menu-icon' + ' ' + (_menuOpened ? 'opened' : '')" (click)="_onMenuOpen()">
+        <span class="bar-top-menu-caller fa fa-home"></span>
+    </div>
+    <ul *ngIf="_menuOpened" class="bar-top-menu root">
+            <bar-top-menu-item *ngFor="let _item of _items;"
+            [caption]="_item.caption"
+            [icon]="_item.icon"
+            [handler]="_item.handler"
+            [items]="_item.items"></bar-top-menu-item>
+    </ul>
+</div>

@@ -1,0 +1,16 @@
+{
+  "name": "esrlab",
+  "version": "0.0.1",
+  "description": "",
+  "main": "service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SkyNet",
+  "license": "ISC",
+  "dependencies": {
+    "guid": "0.0.12",
+    "mqtt": "^2.9.1",
+    "websocket": "^1.0.24"
+  }
+}

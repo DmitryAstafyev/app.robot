@@ -1,0 +1,55 @@
+apps-robot-logger{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top:0;
+    left:0;
+    .apps-robot-logs{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background: @black;
+        .apps-robot-log{
+            font-family: sans-serif, Haettenschweiler, 'Arial Narrow Bold';
+            font-size: 0.80rem;
+            color: @green;
+            white-space: nowrap;
+            padding: 0.05rem 1rem;
+            margin: 0;
+            line-height: 1;
+        }
+    }
+    .apps-robot-logs-auto-scroll{
+        display: block;
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 1.5rem;
+        color:@white;
+        bottom: 2rem;
+        right: 1rem;
+        animation			: apps-robot-logs-auto-scroll-anim 1050ms ease-in-out 0ms infinite normal;
+        -webkit-animation	: apps-robot-logs-auto-scroll-anim 1050ms ease-in-out 0ms infinite normal;
+        -moz-animation		: apps-robot-logs-auto-scroll-anim 1050ms ease-in-out 0ms infinite normal;
+        -o-animation		: apps-robot-logs-auto-scroll-anim 1050ms ease-in-out 0ms infinite normal;
+    }
+
+}
+
+@keyframes apps-robot-logs-auto-scroll-anim {
+    0% {
+        transform           : translateY(0);
+        opacity             :0.4;
+    }
+    50% {
+        opacity             :1;
+        transform           : translateY(1rem);
+    }
+    100% {
+        transform           : translateY(0);
+        opacity             :0.4;
+    }
+}

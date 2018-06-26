@@ -1,0 +1,134 @@
+bar-top{
+    position  : absolute;
+    width     : 100%;
+    height    : 2rem;
+    display: block;
+    .bar-top{
+        position  : absolute;
+        width     : 100%;
+        height    : 100%;
+        background: @gradiend-blue-example;
+        border-top:@3d-border-left-top;
+        border-left:@3d-border-left-top;
+        border-right: @3d-border-right-bottom;
+        border-bottom: @3d-border-right-bottom;
+        box-sizing: border-box;
+        .bar-top-menu-icon{
+            position: absolute;
+            top:0;
+            left:0;
+            width:2rem;
+            height: 2rem;
+            .bar-top-menu-caller{
+                position: absolute;
+                display: block;
+                top:0;
+                left:0;
+                width:100%;
+                height: 100%;
+                font-size: 1.4rem;
+                padding: 0.16rem;
+                color: @white;
+                text-shadow: @text-dark-shadow;
+            }
+            &.opened{
+                .bar-top-menu-caller{
+                    color: @white;
+                    text-shadow: none;
+                }
+            }
+        }
+        .bar-top-menu{
+            display: block;
+            position: absolute;
+            background: @gradiend-blue-example;
+            border-top:@3d-border-left-top;
+            border-left:@3d-border-left-top;
+            border-right: @3d-border-right-bottom;
+            border-bottom: @3d-border-right-bottom;
+            box-sizing: border-box;
+            box-shadow: @light-shadow;
+            list-style: 0;
+            margin: 0.25rem 0;
+            padding: 0.5rem 0;
+            cursor: default;
+            border-radius: 0.15rem;
+            z-index: 200;
+            &.root{
+                top:100%;
+                left:0;
+            }
+            &.nested{
+                top:-0.8rem;
+                left:~"calc(100% + 0.5rem)";
+                display: none;
+                &::before{
+                    position: absolute;
+                    content: '';
+                    top:0;
+                    left:-0.5rem;
+                    width: 0.5rem;
+                    height: 100%;
+                    background: rgba(0,0,0,0.00001);
+                }
+            }
+            &.nested:hover{
+                display: block;
+            }
+            .bar-top-menu-item{
+                position: relative;
+                display: block;
+                padding: 0.25rem 1rem 0 0.5rem;
+                margin: 0;
+                color:@white;
+                font-size: 0.95rem;
+                white-space: nowrap;
+                line-height: 1;
+                .bar-top-menu-item-icon{
+                    position: relative;
+                    display: inline-block;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    margin-right: 0.5rem;
+                    vertical-align: middle;
+                    font-size: 1.3rem;
+                    text-align: center;
+                    line-height: 1.2;
+                }
+                .bar-top-menu-item-caption{
+                    position: relative;
+                    display: inline-block;
+                    height: 1.5rem;
+                }
+                &.has-nested{
+                    &:before{
+                        position: absolute;
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border-top: 0.35rem solid transparent;
+                        border-left: 0.35rem solid @white;
+                        border-bottom: 0.35rem solid transparent;
+                        top: 0.55rem;
+                        right: 0.25rem;
+                        transition: transform 250ms linear;
+                    }
+                }
+                &:hover{
+                    background: @gradient-light;
+                    color:@black;
+                    &.has-nested{
+                        &:before{
+                            border-left: 0.35rem solid @black;
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+                &:hover > .nested{
+                    display: block;
+                }
+            }
+        }
+
+    }
+}

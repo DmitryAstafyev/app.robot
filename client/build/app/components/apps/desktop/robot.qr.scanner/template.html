@@ -1,0 +1,19 @@
+<div class="apps-robot-qr-scanner-wrapper">
+    <div class="apps-robot-qr-scanner" #_wrapper>
+        <span [attr.class]="'apps-robot-qr-scanner-arrow fa fa-long-arrow-down ' + ((_points.length - 1) === i ? 'last' : '')" 
+            *ngFor="let point of _points; let i = index;"
+            [style.top]="_getStyles(point, i).top"
+            [style.left]="_getStyles(point, i).left"
+            [style.opacity]="_getStyles(point, i).opacity"
+            [style.transform]="_getStyles(point,i ).transform"></span>
+        <span class="apps-robot-qr-scanner-robot fa fa-paw"
+            *ngFor="let pow of _pows; let i = index;"
+            [style.top]="_getPowStyles(pow, i).top"
+            [style.left]="_getPowStyles(pow, i).left"
+            [style.opacity]="_getPowStyles(pow, i).opacity"
+            ></span>
+    </div>
+    <span class="apps-robot-qr-scanner-tl">(0, 0)</span>
+    <span class="apps-robot-qr-scanner-rb">({{_maxX}}, {{_maxY}})</span>
+</div>
+

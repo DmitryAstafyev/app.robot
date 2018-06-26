@@ -1,0 +1,12 @@
+<div class="bar-bottom">
+    <ul class="bar-bottom-windows">
+        <li class="bar-bottom-window-title-wrapper" *ngFor="let _window of _windows;" (click)="_onModalWindowClick(_window)">
+            <p class="bar-bottom-window-title">{{_window.caption}}</p>
+        </li>
+    </ul>
+    <ul class="bar-bottom-apps">
+        <li class="bar-bottom-apps-wrapper" *ngFor="let _app of _apps;">
+            <bar-bottom-app-wrapper [component]="_app.component"></bar-bottom-app-wrapper>
+        </li>
+    </ul>
+</div>

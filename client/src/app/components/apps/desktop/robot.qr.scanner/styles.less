@@ -1,0 +1,65 @@
+apps-robot-qr-scanner{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top:0;
+    left:0;
+    .apps-robot-qr-scanner-wrapper{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: @black;
+        .apps-robot-qr-scanner-tl,
+        .apps-robot-qr-scanner-rb{
+            position: absolute;
+            font-size: 0.85rem;
+            color:@yellow;
+            display: block;
+        }
+        .apps-robot-qr-scanner-tl{
+            top:0.5rem;
+            left:0.5rem;
+        }
+        .apps-robot-qr-scanner-rb{
+            right: 0.5rem;
+            bottom: 0.5rem;
+        }
+        .apps-robot-qr-scanner{
+            display: block;
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            right: 2rem;
+            bottom: 2rem;
+            background: @black;
+            border: thin dashed @red;
+            .apps-robot-qr-scanner-arrow{
+                position: absolute;
+                display: block;
+                font-size: 1.5rem;
+                color: @green;
+                padding: 0;
+                margin: 0;
+                line-height: 1;
+                &.last{
+                    color: @yellow;
+                }
+            }
+            .apps-robot-qr-scanner-robot{
+                position: absolute;
+                display: block;
+                font-size: 0.7rem;
+                color: @white;
+                padding: 0;
+                margin: 0;
+                line-height: 1;
+            }
+        }
+    }
+    
+
+
+}

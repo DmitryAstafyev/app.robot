@@ -1,0 +1,10 @@
+<li [attr.class]="'bar-top-menu-item' + ' ' + (items.length > 0 ? 'has-nested' : '')">
+    <span [attr.class]="'bar-top-menu-item-icon' + ' ' + icon" (mousedown)="_onMenuItemClick()"></span><span class="bar-top-menu-item-caption" (mousedown)="_onMenuItemClick()">{{caption}}</span>
+    <ul *ngIf="items.length > 0" class="bar-top-menu nested">
+        <bar-top-menu-item *ngFor="let _item of items;"
+        [caption]="_item.caption"
+        [icon]="_item.icon"
+        [handler]="_item.handler"
+        [items]="_item.items"></bar-top-menu-item>
+    </ul>
+</li>

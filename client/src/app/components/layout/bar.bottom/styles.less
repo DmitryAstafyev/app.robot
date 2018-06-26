@@ -1,0 +1,82 @@
+bar-bottom{
+    position  : absolute;
+    width     : 100%;
+    height    : 2rem;
+    bottom    : 0;
+    display   : block;
+    .bar-bottom{
+        position  : absolute;
+        width     : 100%;
+        height    : 100%;
+        background: @gradient-dark-blue-example;
+        border-bottom:@3d-border-left-top;
+        border-right:@3d-border-left-top;
+        border-left: @3d-border-right-bottom;
+        border-top: @3d-border-right-bottom;
+        box-sizing: border-box;
+        .bar-bottom-windows{
+            position: absolute;
+            display: block;
+            height: 100%;
+            text-align: left;
+            left:0;
+            top:0;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            .bar-bottom-window-title-wrapper{
+                position: relative;
+                display: inline-block;
+                list-style: none;
+                border-radius: 0.15rem;
+                background: @gradiend-blue-example;
+                border-top:@3d-border-left-top;
+                border-left:@3d-border-left-top;
+                border-right: @3d-border-right-bottom;
+                border-bottom: @3d-border-right-bottom;
+                box-sizing: border-box;
+                margin: 0.2rem 0.1rem;
+                padding: 0;
+                .bar-bottom-window-title{
+                    position: relative;
+                    margin: 0;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-size: 0.8rem;
+                    color:@white;
+                    text-shadow: @text-dark-shadow;
+                    padding: 0.15rem 0.5rem;
+                    cursor: default;
+                    max-width: 10rem;
+                }
+                &:hover{
+                    background: @gradient-blue-reverse;
+                    border-bottom:@3d-border-left-top;
+                    border-right:@3d-border-left-top;
+                    border-left: @3d-border-right-bottom;
+                    border-top: @3d-border-right-bottom;
+                }
+            }
+        }
+        .bar-bottom-apps{
+            position: absolute;
+            display: block;
+            height: 100%;
+            text-align: right;
+            right:0;
+            top:0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            white-space: nowrap;
+            border-left: @3d-border-splitter;
+            .bar-bottom-apps-wrapper{
+                position: relative;
+                display: inline-block;
+                height: 100%;
+                list-style: none;
+            }
+        }
+    }
+}

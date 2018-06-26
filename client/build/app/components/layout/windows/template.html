@@ -1,0 +1,14 @@
+<div class="windows">
+    <modal-window *ngFor="let _window of _windows;"
+        [id]="_window.id"
+        [component]="_window.component"
+        [closable]="_window.closable"
+        [resizable]="_window.resizable"
+        [movable]="_window.movable"
+        [maximizable]="_window.maximizable"
+        [minimizibal]="_window.minimizibal"
+        [caption]="_window.caption"
+        [focused]="_window.focused"
+        [buttons]="_window.buttons"></modal-window>
+    <effect-fog></effect-fog>
+</div>
