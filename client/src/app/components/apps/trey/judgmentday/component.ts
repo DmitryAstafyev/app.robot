@@ -10,7 +10,7 @@ export class AppsJudgmentDay {
     private _hours: string = '00';
     private _minutes: string = '00';
     private _seconds: string = '00';
-    private _day: number = (new Date('01.01.2020')).getTime();
+    private _day: number = (new Date('01/01/2020')).getTime();
 
     constructor() {
         this._tick();

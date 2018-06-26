@@ -66,8 +66,8 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
         this._onHolderResized = this._onHolderResized.bind(this);
         this._onQRCome = this._onQRCome.bind(this);
         this._onBrickUS1Come = this._onBrickUS1Come.bind(this);
-        this._emulate();
-        //this._connect();
+        //this._emulate();
+        this._connect();
     }
 
     ngOnDestroy(){
