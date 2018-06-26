@@ -5,15 +5,22 @@
             [style.top]="_getStyles(point, i).top"
             [style.left]="_getStyles(point, i).left"
             [style.opacity]="_getStyles(point, i).opacity"
+            [style.fontSize]="_getStyles(point, i).fontSize"
             [style.transform]="_getStyles(point,i ).transform"></span>
-        <span class="apps-robot-qr-scanner-robot fa fa-paw"
+        <span [attr.class]="'apps-robot-qr-scanner-robot fa fa-paw ' + ((_pows.length - 1) === i ? 'last' : '')"
             *ngFor="let pow of _pows; let i = index;"
             [style.top]="_getPowStyles(pow, i).top"
             [style.left]="_getPowStyles(pow, i).left"
             [style.opacity]="_getPowStyles(pow, i).opacity"
             ></span>
+        <span [attr.class]="'apps-robot-qr-scanner-us1 fa fa-remove ' + ((_us1.length - 1) === i ? 'last' : '')"
+            *ngFor="let point of _us1; let i = index;"
+            [style.top]="_getUs1Styles(point, i).top"
+            [style.left]="_getUs1Styles(point, i).left"
+            [style.opacity]="_getUs1Styles(point, i).opacity"
+            ></span>
     </div>
     <span class="apps-robot-qr-scanner-tl">(0, 0)</span>
-    <span class="apps-robot-qr-scanner-rb">({{_maxX}}, {{_maxY}})</span>
+    <span class="apps-robot-qr-scanner-rb">({{_maxX.toFixed(2)}}, {{_maxY.toFixed(2)}})</span>
 </div>
 

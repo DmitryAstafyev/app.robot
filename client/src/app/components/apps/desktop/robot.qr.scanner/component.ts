@@ -66,8 +66,8 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
         this._onHolderResized = this._onHolderResized.bind(this);
         this._onQRCome = this._onQRCome.bind(this);
         this._onBrickUS1Come = this._onBrickUS1Come.bind(this);
-        //this._emulate();
-        this._connect();
+        this._emulate();
+        //this._connect();
     }
 
     ngOnDestroy(){
@@ -159,7 +159,8 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
             top: `${point._y}px`,
             left: `${point._x}px`,
             opacity: index / this._points.length,
-            transform: `rotate(${point.angle}rad)`
+            transform: `rotate(${point.angle}rad)`,
+            fontSize: `${1.5 * (this._maxX < 150 ? 1 : (150 / this._maxX))}rem`
         }
     }
 
@@ -242,6 +243,8 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
             point._x = point.x * rate - Math.cos(point.a - US1_OFFSET_ANGLE) * point.d * rate;
             point._y = point.y * rate - Math.sin(point.a - US1_OFFSET_ANGLE) * point.d * rate;
             return point;
+        }).filter((point: IUSPoint) => {
+            return point._x !== 0 && point._y !==0;
         });
     }
 
@@ -249,7 +252,7 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
         return {
             top: `${point._y}px`,
             left: `${point._x}px`,
-            opacity: index / this._us1.length
+            opacity: point._x !== 0 ? (point._y !== 0 ? (index / this._us1.length) : 0) : 0 
         }
     }
 

@@ -48,14 +48,21 @@ apps-robot-qr-scanner{
                     color: @yellow;
                 }
             }
-            .apps-robot-qr-scanner-robot{
+            .apps-robot-qr-scanner-robot,
+            .apps-robot-qr-scanner-us1{
                 position: absolute;
                 display: block;
                 font-size: 0.7rem;
-                color: @white;
+                color: @blue;
                 padding: 0;
                 margin: 0;
                 line-height: 1;
+                &.last{
+                    color: @yellow;
+                }
+            }
+            .apps-robot-qr-scanner-us1{
+                color:@white;
             }
         }
     }

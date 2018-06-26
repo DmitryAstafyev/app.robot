@@ -4,10 +4,13 @@ const core_1 = require("@angular/core");
 const connection_websocket_1 = require("../connections/connection.websocket");
 const HOOKS = {
     PHONE: /^PHONE_\d{1,};/gi,
-    QR: /QR_\d{1,};/gi
+    BRICK: /^BRICK_\d{1,}:/gi,
+    QR: /QR_\d{1,};/gi,
+    US_1: /US_1;/gi
 };
 const EXTRACTORS = {
-    QR: /QR_\d{1,};[\w\d]*,[\-\d\.]*,[\-\d\.]*,[\-\d\.]*/gi
+    QR: /QR_\d{1,};[\w\d]*,[\-\d\.]*,[\-\d\.]*,[\-\d\.]*/gi,
+    US_1: /US_1;[\d\.]{1,}/gi
 };
 class ServiceStaticWSConnector {
     constructor() {
@@ -16,6 +19,7 @@ class ServiceStaticWSConnector {
         this.EData = new core_1.EventEmitter();
         this.EError = new core_1.EventEmitter();
         this.EPhoneQR = new core_1.EventEmitter();
+        this.EBrickUS1 = new core_1.EventEmitter();
         this._emulatorTimer = null;
         this._onConnected = this._onConnected.bind(this);
         this._onData = this._onData.bind(this);
@@ -119,6 +123,14 @@ class ServiceStaticWSConnector {
                     y: parseFloat(parts[2]),
                     x: parseFloat(parts[3])
                 });
+            }
+            if (str.search(HOOKS.BRICK) !== -1 && str.search(HOOKS.US_1) !== -1) {
+                const match = str.match(EXTRACTORS.US_1);
+                if (match === null || match.length !== 1) {
+                    return;
+                }
+                const distance = match[0].replace(HOOKS.US_1, '');
+                this.EBrickUS1.emit(parseFloat(distance));
             }
         });
     }

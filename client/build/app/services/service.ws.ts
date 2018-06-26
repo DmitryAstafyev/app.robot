@@ -14,11 +14,14 @@ export interface IPhoneQR {
 
 const HOOKS = {
     PHONE: /^PHONE_\d{1,};/gi,
-    QR: /QR_\d{1,};/gi
+    BRICK: /^BRICK_\d{1,}:/gi,
+    QR: /QR_\d{1,};/gi,
+    US_1: /US_1;/gi
 };
 
 const EXTRACTORS = {
-    QR: /QR_\d{1,};[\w\d]*,[\-\d\.]*,[\-\d\.]*,[\-\d\.]*/gi
+    QR: /QR_\d{1,};[\w\d]*,[\-\d\.]*,[\-\d\.]*,[\-\d\.]*/gi,
+    US_1: /US_1;[\d\.]{1,}/gi
 };
 
 class ServiceStaticWSConnector {
@@ -29,6 +32,7 @@ class ServiceStaticWSConnector {
     public EError: EventEmitter<string> = new EventEmitter<string>();
 
     public EPhoneQR: EventEmitter<IPhoneQR> = new EventEmitter<IPhoneQR>();
+    public EBrickUS1: EventEmitter<number> = new EventEmitter<number>();
 
     private _connection: ConnectionWebSocket;
     private _emulatorTimer: any = null;
@@ -153,6 +157,14 @@ class ServiceStaticWSConnector {
                     y: parseFloat(parts[2]),
                     x: parseFloat(parts[3])
                 });
+            }
+            if (str.search(HOOKS.BRICK) !== -1 && str.search(HOOKS.US_1) !== -1){
+                const match = str.match(EXTRACTORS.US_1);
+                if (match === null || match.length !== 1) {
+                    return;
+                }
+                const distance = match[0].replace(HOOKS.US_1, '');
+                this.EBrickUS1.emit(parseFloat(distance));
             }
         });
     }

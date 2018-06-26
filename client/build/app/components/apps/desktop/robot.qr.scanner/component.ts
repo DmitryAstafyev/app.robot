@@ -1,49 +1,73 @@
 import {Component, OnDestroy, ViewChild, ElementRef, Input, EventEmitter, AfterViewChecked} from '@angular/core';
+import { ModalWindow } from '../../../../classes/environment/modalwindow';
 import ServiceStaticWSConnector from '../../../../services/service.ws';
 import { IPhoneQR } from '../../../../services/service.ws';
 import { Subscription } from 'rxjs/Subscription';
 import { GUID } from '../../../../tools/tools.guid';
+
+interface IPawPoint {
+    x: number, 
+    y: number, 
+    _x: number, 
+    _y: number,  
+    a: number, 
+}
+interface IUSPoint {
+    x: number, 
+    y: number, 
+    _x: number, 
+    _y: number, 
+    __x: number, 
+    __y: number, 
+    a: number, 
+    d: number
+};
+
 const SERVER = {
     WS_URL      : "ws://localhost:8081/",
     WS_PROTOCOL : "robot",
 };
 
-const POINTS_LIMITATION = 500;
+const POINTS_LIMITATION = 200;
 const POWS_LIMITATION = 50;
+const US1_LIMITATION = 200;
 
-const OFFSET_X = 200;
-const OFFSET_Y = 100;
+const POW_OFFSET_ANGLE = 1.5708;//rad
+const POW_DISTANCE = 12;
+const US1_OFFSET_ANGLE = 1.5708;//rad
 
 @Component({
     selector    : 'apps-robot-qr-scanner',
     templateUrl : './template.html',
 })
 
-export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
-
-    @Input() EHolderResized: EventEmitter<any>;
+export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterViewChecked {
 
     private _eHolderResized: Subscription;
     private _ePhoneQR: Subscription;
+    private _eBrickUS1: Subscription;
+
 
     private _points: Array<IPhoneQR> = [];
-    private _pows: Array<{x: number, y: number}> = [];
+    private _pows: Array<IPawPoint> = [];
+    private _us1: Array<IUSPoint> = [];
 
     private _maxY: number = 0;
     private _maxX: number = 0;
     private _width: number = 0;
     private _height: number = 0;
 
-    private _robotX: number = 0;
-    private _robotY: number = 0;
     private _GUID: string = GUID.generate();
 
     @ViewChild("_wrapper", {read: ElementRef}) _wrapper: ElementRef;
 
     constructor() {
-        //this._connect();
-        this._emulate();
+        super();
         this._onHolderResized = this._onHolderResized.bind(this);
+        this._onQRCome = this._onQRCome.bind(this);
+        this._onBrickUS1Come = this._onBrickUS1Come.bind(this);
+        this._emulate();
+        //this._connect();
     }
 
     ngOnDestroy(){
@@ -62,7 +86,6 @@ export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
     }
 
     private _connect(){
-        this._onQRCome = this._onQRCome.bind(this);
         this._bind();
         if (!ServiceStaticWSConnector.isConnected()){
             ServiceStaticWSConnector.connect(SERVER.WS_URL, SERVER.WS_PROTOCOL);
@@ -70,7 +93,6 @@ export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
     }
 
     private _emulate(){
-        this._onQRCome = this._onQRCome.bind(this);
         this._bind();
         if (!ServiceStaticWSConnector.isEmulation()){
             ServiceStaticWSConnector.emulationStart();
@@ -79,24 +101,56 @@ export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
 
     private _bind(){
         this._ePhoneQR = ServiceStaticWSConnector.EPhoneQR.subscribe(this._onQRCome);
+        this._eBrickUS1 = ServiceStaticWSConnector.EBrickUS1.subscribe(this._onBrickUS1Come);
     }
 
     private _unbind(){
         this._ePhoneQR.unsubscribe();
+        this._eBrickUS1.unsubscribe();
     }
 
     private _onQRCome(data: IPhoneQR){
         data = Object.assign({}, data);
-        data.angle = - data.angle;
-        //data._angle = data.angle * 180 / Math.PI;
+        data.angle = -data.angle;
         this._points.push(data);
+        this._pows.push({
+            a: this._points[this._points.length - 1].angle,
+            x: this._points[this._points.length - 1].x,
+            y: this._points[this._points.length - 1].y,
+            _x: 0,
+            _y: 0
+        });
         this._checkLimit();
         this._calculate();
+    }
+
+    private _onBrickUS1Come(distance: number){
+        if (this._points.length === 0) {
+            return;
+        }
+        const last = this._points[this._points.length - 1];
+        this._us1.push({
+            a: last.angle,
+            x: last.x,
+            y: last.y,
+            d: distance / 10,
+            _x: 0,
+            _y: 0,
+            __x: 0,
+            __y: 0
+        });
+        this._checkLimit();
     }
 
     private _checkLimit(){
         if (this._points.length > POINTS_LIMITATION) {
             this._points.splice(0, this._points.length - POINTS_LIMITATION)
+        }
+        if (this._pows.length > POWS_LIMITATION) {
+            this._pows.splice(1, 0);
+        }
+        if (this._us1.length > US1_LIMITATION) {
+            this._us1.splice(1, 0);
         }
     }
 
@@ -105,7 +159,8 @@ export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
             top: `${point._y}px`,
             left: `${point._x}px`,
             opacity: index / this._points.length,
-            transform: `rotate(${point.angle}rad)`
+            transform: `rotate(${point.angle}rad)`,
+            fontSize: `${1.5 * (this._maxX < 150 ? 1 : (150 / this._maxX))}rem`
         }
     }
 
@@ -132,6 +187,14 @@ export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
                 this._maxY = point.y;
             }
         });
+        this._us1.forEach((point) => {
+            if (this._maxX < point.__x) {
+                this._maxX = point.__x;
+            }
+            if (this._maxY < point.__y) {
+                this._maxY = point.__y;
+            }
+        });
     }
 
     private _calculate(){
@@ -154,34 +217,42 @@ export class AppsRobotQRScanner implements OnDestroy, AfterViewChecked {
             return point;
         });
         this._updateRobotCoord(rate);
+        this._updateUS1Coord(rate);
     }
 
     private _updateRobotCoord(rate: number){
-        if (this._points.length === 0) {
-            return;
-        }
-        const last = this._points[this._points.length - 1];
-        const offset = 1.5708;
-        /*
-        this._robotX = last.x + Math.cos(last.angle) * 12;
-        this._robotY = last.y + Math.sin(last.angle) * 12;
-        */
-        const robotX = last._x - Math.cos(last.angle - offset) * 12 * rate;
-        const robotY = last._y - Math.sin(last.angle - offset) * 12 * rate;
-        this._pows.push({
-            x: robotX,
-            y: robotY
+        this._pows = this._pows.map((pow: IPawPoint) => {
+            pow._x = pow.x * rate - Math.cos(pow.a - POW_OFFSET_ANGLE) * POW_DISTANCE * rate;
+            pow._y = pow.y * rate - Math.sin(pow.a - POW_OFFSET_ANGLE) * POW_DISTANCE * rate;
+            return pow;
         });
-        if (this._pows.length > POWS_LIMITATION) {
-            this._pows.splice(1, 0);
+    }
+
+    private _getPowStyles(pow: IPawPoint, index: number){
+        return {
+            top: `${pow._y}px`,
+            left: `${pow._x}px`,
+            opacity: index / this._pows.length
         }
     }
 
-    private _getPowStyles(pow: {x: number, y: number}, index: number){
+    private _updateUS1Coord(rate: number){
+        this._us1 = this._us1.map((point: IUSPoint) => {
+            point.__x = point.x - Math.cos(point.a - US1_OFFSET_ANGLE) * point.d;
+            point.__y = point.y - Math.sin(point.a - US1_OFFSET_ANGLE) * point.d;
+            point._x = point.x * rate - Math.cos(point.a - US1_OFFSET_ANGLE) * point.d * rate;
+            point._y = point.y * rate - Math.sin(point.a - US1_OFFSET_ANGLE) * point.d * rate;
+            return point;
+        }).filter((point: IUSPoint) => {
+            return point._x !== 0 && point._y !==0;
+        });
+    }
+
+    private _getUs1Styles(point: IUSPoint, index: number){
         return {
-            top: `${pow.y}px`,
-            left: `${pow.x}px`,
-            opacity: index / this._pows.length
+            top: `${point._y}px`,
+            left: `${point._x}px`,
+            opacity: point._x !== 0 ? (point._y !== 0 ? (index / this._us1.length) : 0) : 0 
         }
     }
 
