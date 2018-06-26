@@ -19,7 +19,7 @@ const SERVER = {
     WS_PROTOCOL: "robot",
 };
 const POINTS_LIMITATION = 200;
-const POWS_LIMITATION = 50;
+const POWS_LIMITATION = 10;
 const US1_LIMITATION = 200;
 const POW_OFFSET_ANGLE = 1.5708; //rad
 const POW_DISTANCE = 12;

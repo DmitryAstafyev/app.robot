@@ -66,8 +66,8 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
         this._onHolderResized = this._onHolderResized.bind(this);
         this._onQRCome = this._onQRCome.bind(this);
         this._onBrickUS1Come = this._onBrickUS1Come.bind(this);
-        //this._emulate();
-        this._connect();
+        this._emulate();
+        //this._connect();
     }
 
     ngOnDestroy(){
@@ -144,13 +144,13 @@ export class AppsRobotQRScanner extends ModalWindow implements OnDestroy, AfterV
 
     private _checkLimit(){
         if (this._points.length > POINTS_LIMITATION) {
-            this._points.splice(0, this._points.length - POINTS_LIMITATION)
+            this._points.splice(0, 1)
         }
         if (this._pows.length > POWS_LIMITATION) {
-            this._pows.splice(1, 0);
+            this._pows.splice(0, 1);
         }
         if (this._us1.length > US1_LIMITATION) {
-            this._us1.splice(1, 0);
+            this._us1.splice(0, 1);
         }
     }
 

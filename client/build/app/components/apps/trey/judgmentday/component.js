@@ -16,7 +16,7 @@ let AppsJudgmentDay = class AppsJudgmentDay {
         this._hours = '00';
         this._minutes = '00';
         this._seconds = '00';
-        this._day = (new Date('01.01.2020')).getTime();
+        this._day = 1577833200000;
         this._tick();
     }
     _fill(value) {

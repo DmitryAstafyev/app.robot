@@ -2532,6 +2532,88 @@ modal-window .modal-window .modal-window-boder-corner {
   height: 10px;
   cursor: nwse-resize;
 }
+bar-bottom {
+  position: absolute;
+  width: 100%;
+  height: 2rem;
+  bottom: 0;
+  display: block;
+}
+bar-bottom .bar-bottom {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #3f4c6b 0%, #3f4c6b 100%);
+  border-bottom: thin solid #c8c8c8;
+  border-right: thin solid #c8c8c8;
+  border-left: thin solid #afafaf;
+  border-top: thin solid #afafaf;
+  box-sizing: border-box;
+}
+bar-bottom .bar-bottom .bar-bottom-windows {
+  position: absolute;
+  display: block;
+  height: 100%;
+  text-align: left;
+  left: 0;
+  top: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+bar-bottom .bar-bottom .bar-bottom-windows .bar-bottom-window-title-wrapper {
+  position: relative;
+  display: inline-block;
+  list-style: none;
+  border-radius: 0.15rem;
+  background: linear-gradient(to bottom, #a7c7dc 0%, #85b2d3 100%);
+  border-top: thin solid #c8c8c8;
+  border-left: thin solid #c8c8c8;
+  border-right: thin solid #afafaf;
+  border-bottom: thin solid #afafaf;
+  box-sizing: border-box;
+  margin: 0.2rem 0.1rem;
+  padding: 0;
+}
+bar-bottom .bar-bottom .bar-bottom-windows .bar-bottom-window-title-wrapper .bar-bottom-window-title {
+  position: relative;
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.8rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  padding: 0.15rem 0.5rem;
+  cursor: default;
+  max-width: 10rem;
+}
+bar-bottom .bar-bottom .bar-bottom-windows .bar-bottom-window-title-wrapper:hover {
+  background: linear-gradient(to bottom, #85b2d3 0%, #a7c7dc 100%);
+  border-bottom: thin solid #c8c8c8;
+  border-right: thin solid #c8c8c8;
+  border-left: thin solid #afafaf;
+  border-top: thin solid #afafaf;
+}
+bar-bottom .bar-bottom .bar-bottom-apps {
+  position: absolute;
+  display: block;
+  height: 100%;
+  text-align: right;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  border-left: thin groove #c8c8c8;
+}
+bar-bottom .bar-bottom .bar-bottom-apps .bar-bottom-apps-wrapper {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  list-style: none;
+}
 effect-fog {
   display: block;
   position: absolute;
@@ -2720,88 +2802,6 @@ effect-fog #foglayer_03 .image02 {
   100% {
     left: -100%;
   }
-}
-bar-bottom {
-  position: absolute;
-  width: 100%;
-  height: 2rem;
-  bottom: 0;
-  display: block;
-}
-bar-bottom .bar-bottom {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, #3f4c6b 0%, #3f4c6b 100%);
-  border-bottom: thin solid #c8c8c8;
-  border-right: thin solid #c8c8c8;
-  border-left: thin solid #afafaf;
-  border-top: thin solid #afafaf;
-  box-sizing: border-box;
-}
-bar-bottom .bar-bottom .bar-bottom-windows {
-  position: absolute;
-  display: block;
-  height: 100%;
-  text-align: left;
-  left: 0;
-  top: 0;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-}
-bar-bottom .bar-bottom .bar-bottom-windows .bar-bottom-window-title-wrapper {
-  position: relative;
-  display: inline-block;
-  list-style: none;
-  border-radius: 0.15rem;
-  background: linear-gradient(to bottom, #a7c7dc 0%, #85b2d3 100%);
-  border-top: thin solid #c8c8c8;
-  border-left: thin solid #c8c8c8;
-  border-right: thin solid #afafaf;
-  border-bottom: thin solid #afafaf;
-  box-sizing: border-box;
-  margin: 0.2rem 0.1rem;
-  padding: 0;
-}
-bar-bottom .bar-bottom .bar-bottom-windows .bar-bottom-window-title-wrapper .bar-bottom-window-title {
-  position: relative;
-  margin: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 0.8rem;
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-  padding: 0.15rem 0.5rem;
-  cursor: default;
-  max-width: 10rem;
-}
-bar-bottom .bar-bottom .bar-bottom-windows .bar-bottom-window-title-wrapper:hover {
-  background: linear-gradient(to bottom, #85b2d3 0%, #a7c7dc 100%);
-  border-bottom: thin solid #c8c8c8;
-  border-right: thin solid #c8c8c8;
-  border-left: thin solid #afafaf;
-  border-top: thin solid #afafaf;
-}
-bar-bottom .bar-bottom .bar-bottom-apps {
-  position: absolute;
-  display: block;
-  height: 100%;
-  text-align: right;
-  right: 0;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  white-space: nowrap;
-  border-left: thin groove #c8c8c8;
-}
-bar-bottom .bar-bottom .bar-bottom-apps .bar-bottom-apps-wrapper {
-  position: relative;
-  display: inline-block;
-  height: 100%;
-  list-style: none;
 }
 bar-top {
   position: absolute;
@@ -3106,6 +3106,54 @@ windows .windows {
   background-position: center;
   overflow: hidden;
 }
+button-flat-text span {
+  position: relative;
+  display: inline-block;
+  margin: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+button-flat-text span.disabled {
+  cursor: default;
+}
+button-small-icon {
+  display: inline-block;
+  position: relative;
+  padding: 1px;
+  background: linear-gradient(to bottom, #85b2d3 0%, #a7c7dc 100%);
+  border-radius: 1rem;
+  line-height: 0;
+  margin: 0.3rem 0.2rem;
+}
+button-small-icon span.button-small-icon {
+  position: relative;
+  display: inline-block;
+  padding: 0.3rem 0.3rem;
+  cursor: default;
+  font-size: 0.55rem;
+  border-top: thin solid #c8c8c8;
+  border-left: thin solid #c8c8c8;
+  border-right: thin solid #afafaf;
+  border-bottom: thin solid #afafaf;
+  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
+  border-radius: 1rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+button-small-icon span.button-small-icon:hover {
+  background: linear-gradient(to bottom, #85b2d3 0%, #a7c7dc 100%);
+}
+button-small-icon span.button-small-icon.disabled {
+  cursor: default;
+}
+button-small-icon span.button-small-icon.disabled:hover {
+  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
+}
+button-small-icon span.button-small-icon.focused {
+  background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+}
+button-small-icon span.button-small-icon.focused:hover {
+  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
+}
 apps-robot-logger {
   display: block;
   position: absolute;
@@ -3216,7 +3264,7 @@ apps-robot-qr-scanner .apps-robot-qr-scanner-wrapper .apps-robot-qr-scanner .app
 apps-robot-qr-scanner .apps-robot-qr-scanner-wrapper .apps-robot-qr-scanner .apps-robot-qr-scanner-us1 {
   position: absolute;
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #9c9cfc;
   padding: 0;
   margin: 0;
@@ -3263,54 +3311,6 @@ apps-judgmentday .apps-judgmentday .apps-judgmentday-minutes,
 apps-judgmentday .apps-judgmentday .apps-judgmentday-seconds {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   cursor: default;
-}
-button-flat-text span {
-  position: relative;
-  display: inline-block;
-  margin: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-}
-button-flat-text span.disabled {
-  cursor: default;
-}
-button-small-icon {
-  display: inline-block;
-  position: relative;
-  padding: 1px;
-  background: linear-gradient(to bottom, #85b2d3 0%, #a7c7dc 100%);
-  border-radius: 1rem;
-  line-height: 0;
-  margin: 0.3rem 0.2rem;
-}
-button-small-icon span.button-small-icon {
-  position: relative;
-  display: inline-block;
-  padding: 0.3rem 0.3rem;
-  cursor: default;
-  font-size: 0.55rem;
-  border-top: thin solid #c8c8c8;
-  border-left: thin solid #c8c8c8;
-  border-right: thin solid #afafaf;
-  border-bottom: thin solid #afafaf;
-  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
-  border-radius: 1rem;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-}
-button-small-icon span.button-small-icon:hover {
-  background: linear-gradient(to bottom, #85b2d3 0%, #a7c7dc 100%);
-}
-button-small-icon span.button-small-icon.disabled {
-  cursor: default;
-}
-button-small-icon span.button-small-icon.disabled:hover {
-  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
-}
-button-small-icon span.button-small-icon.focused {
-  background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-}
-button-small-icon span.button-small-icon.focused:hover {
-  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
 }
 button-small-icon {
   display: inline-block;
